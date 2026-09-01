@@ -15,9 +15,11 @@ class TaskController extends Controller
     public function index()
     {
         $task = Task::all();
+
         return response()->json([
+            'message' => 'Tasks retrieved successfully',
             'data' => $task,
-        ]);
+        ], 200);
     }
 
     /**
@@ -40,8 +42,9 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         return response()->json([
+            'message' => 'Task retrieved successfully',
             'date' => $task
-        ]);
+        ], 200);
     }
 
     /**
