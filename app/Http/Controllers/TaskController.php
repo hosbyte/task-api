@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTaskRequest;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -11,23 +13,34 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $task = Task::all();
+        return response()->json([
+            'data' => $task,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
-        //
+
+        $task = Task::create($request->validated());
+
+        return response()->json([
+            'message' => 'Task created successfully',
+            'data' => $task,
+        ], 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Task $task)
     {
-        //
+        return response()->json([
+            'date' => $task
+        ]);
     }
 
     /**
